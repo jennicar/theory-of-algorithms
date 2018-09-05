@@ -44,7 +44,7 @@ int Kayak::num_teams_cant_start(){
 		cin >> num;
 		is_damaged[num] = 1;
 	}
-	if (check_duplicates(damaged_kayaks, s) == false) return 0;
+	if (check_duplicates(damaged_kayaks, s) == false) return false;
 	
 	// reading in teams with reserve kayaks
 	int reserve_kayaks[r];
@@ -53,26 +53,22 @@ int Kayak::num_teams_cant_start(){
 		cin >> num;
 		has_reserve[num] = 1;		
 	}
-	if (check_duplicates(reserve_kayaks, r) == false) return 0;
-	
-	// teams with damaged kayaks will use their own reserve
-	for (int q = 1; q <= n; q++){
-		if ((has_reserve[q] == true) && (is_damaged[q] == true)){
-			is_damaged[q] = false;
-			has_reserve[q] = false;
-		}
-	}
+	if (check_duplicates(reserve_kayaks, r) == false) return false;
 	
 	// lending reserve kayaks to teams with damaged kayaks
 	for (int b = 1; b <= n; b++){
-		if ((is_damaged[b] == 1) && (has_reserve[b] == 0)){
-			if (has_reserve[b - 1] == 1){
-				has_reserve[b - 1] = 0;
-				is_damaged[b] = 0;
+		if ((has_reserve[b] == true) && (is_damaged[b] == true)){
+			is_damaged[b] = false;
+			has_reserve[b] = false;
+		}
+		if ((is_damaged[b] == true) && (has_reserve[b] == false)){
+			if (has_reserve[b - 1] == true){
+				has_reserve[b - 1] = false;
+				is_damaged[b] = false;
 			}
-			else if (has_reserve[b + 1] == 1){
-				has_reserve[b + 1] = 0;
-				is_damaged[b] = 0;
+			else if (has_reserve[b + 1] == true){
+				has_reserve[b + 1] = false;
+				is_damaged[b] = false;
 			}
 		}
 	}
