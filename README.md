@@ -1,5 +1,5 @@
 # theory-of-algorithms
-Class assignments
+git@github.com:jennicar/theory-of-algorithms.git
 
 ## natjecanje
-https://open.kattis.com/problems/natjecanje
+https://github.com/jennicar/theory-of-algorithms/tree/natjecanje
