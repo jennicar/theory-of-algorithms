@@ -5,13 +5,7 @@
 
 using namespace std;
 
-class Kayak{
-	private: bool check_input(int, int, int);
-	private: bool check_duplicates(int[], int);
-	public: int num_teams_cant_start();
-};
-
-bool Kayak::check_duplicates(int array[], int n){
+bool check_duplicates(int array[], int n){
 	for (int i = 1; i <= n; i++){
 		for (int j = 2; j <= n; j++){
 			if (array[i] == array[j]) return false;
@@ -22,7 +16,14 @@ bool Kayak::check_duplicates(int array[], int n){
 	return true;
 }
 
-int Kayak::num_teams_cant_start(){
+bool check_input(int n, int s, int r){
+	if ((n < 2) || (n > 10)) return false;
+	if ((s < 2) || (s > n))	return false;
+	if ((r < 1) || (r > n)) return false;
+	return true;
+}
+
+int main(){
 	int n = 0, s = 0, r = 0, count = 0;
 	
 	// reading and checking input
@@ -76,18 +77,6 @@ int Kayak::num_teams_cant_start(){
 	// counting teams that still have a damaged kayak
 	for (int a = 1; a <= n; a++) if (is_damaged[a] == 1) count += 1;
 	
-	return count;
-}
-
-bool Kayak::check_input(int n, int s, int r){
-	if ((n < 2) || (n > 10)) return false;
-	if ((s < 2) || (s > n))	return false;
-	if ((r < 1) || (r > n)) return false;
-	return true;
-}
-
-int main(){
-	Kayak k;
-	cout << k.num_teams_cant_start();
+	cout << count;
 	return 0;
 }
