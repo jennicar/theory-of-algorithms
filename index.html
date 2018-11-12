@@ -46,7 +46,7 @@
 		<script>
 			function generate(){
 				// gets range
-				/*var min = get_min();
+				var min = get_min();
 				while (min <= 0) {
 					alert("Min number can't be less than 1.");
 					min = get_min();
@@ -56,9 +56,9 @@
 				while (max < min) {
 					alert("Max number can't be less than the min number.");
 					max = get_max();
-				}*/
-				var min = 0;
-				var max = 1000000;
+				}
+				/*var min = 0;
+				var max = 1000000;*/
 
 				// how many digits should my random number have
 				var length = get_length();
@@ -86,13 +86,13 @@
 				number_html.innerHTML = temp;
 			}
 
-			/*function get_min(){
+			function get_min(){
 				return parseInt(prompt("Enter a min number: ", 1));
 			}
 
 			function get_max(){
 				return parseInt(prompt("Enter a max number: ", 1000000));
-			}*/
+			}
 
 			function get_num(){
 				var seed_arr = [];
