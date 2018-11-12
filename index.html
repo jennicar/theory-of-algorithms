@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style>
+			body{ 
+				font-family: monospace; 
+				background-color: black;
+				text-align: center;
+			}
+
+			main{
+				background-color: #51e28d;
+				width: 400px;
+				min-height: 200px;
+				padding: 25px 50px;
+				box-sizing: border-box;
+				border-radius: 100px;
+			}
+
+			#number{
+				height: 25px;
+				width: 100%;
+				text-align: center;
+				font-size: 18px;
+				font-weight: 900;
+			}
+
+			.wrapper{
+				text-align: center;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			button{
+				width: 100px;
+				padding: 10px 5px;
+				box-sizing: border-box;
+				background-color: black;
+				border: none;
+				color: #51e28d;
+			}
+		</style>
+		<script>
+			function generate(){
+				// gets range
+				/*var min = get_min();
+				while (min <= 0) {
+					alert("Min number can't be less than 1.");
+					min = get_min();
+				}
+
+				var max = get_max();
+				while (max < min) {
+					alert("Max number can't be less than the min number.");
+					max = get_max();
+				}*/
+				var min = 0;
+				var max = 1000000;
+
+				// how many digits should my random number have
+				var length = get_length();
+				while ((length > max.toString().length) || (length < min.toString().length) || (length === 0)){
+					length = get_length();
+				}
+
+				// get random numbers
+				var random = [];
+				for (var i = 0; i < length; i++) {
+					random[i] = get_num();
+				}
+				while (random[0] === 0) random[0] = get_num();
+				var temp = parseInt(random.join(''));
+
+				while ((temp > max) || (temp < min)){
+					for (var i = 0; i < length; i++) random[i] = get_num();
+					temp = parseInt(random.join(''));
+				}
+
+				while((random[0] === 0) || temp === 0) random[0] = get_num();
+				temp = parseInt(random.join(''));
+
+				var number_html = document.getElementById("number");
+				number_html.innerHTML = temp;
+			}
+
+			/*function get_min(){
+				return parseInt(prompt("Enter a min number: ", 1));
+			}
+
+			function get_max(){
+				return parseInt(prompt("Enter a max number: ", 1000000));
+			}*/
+
+			function get_num(){
+				var seed_arr = [];
+				var total = 0;
+				for (var i = 0; i < 500; i++){
+					seed_arr[i] = get_seed();
+					total += seed_arr[i];
+				}
+				total /= 73;
+				var arr = total.toString().split('');
+				var num = arr[arr.length - 1];
+				//console.log(num);
+				return num;
+			}
+
+			function get_seed(){
+				return Date.now();
+			}
+
+			function get_length(){
+				var seed = get_seed();
+				var arr = seed.toString().split('');
+				return parseInt(arr[arr.length - 1]);
+			}
+		</script>
+	</head>
+	<body class="wrapper">
+		<main>
+			<h1>Random Number Generator</h1>
+			Between 1 and a million.
+			<p id="number">0</p>
+			<button onclick="generate()">Generate</button>
+		</main>
+	</body>
+</html>
+
