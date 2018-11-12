@@ -46,7 +46,7 @@
 		<script>
 			function generate(){
 				// gets range
-				var min = get_min();
+				/*var min = get_min();
 				while (min <= 0) {
 					alert("Min number can't be less than 1.");
 					min = get_min();
@@ -56,31 +56,32 @@
 				while (max < min) {
 					alert("Max number can't be less than the min number.");
 					max = get_max();
-				}
-				/*var min = 0;
-				var max = 1000000;*/
+				}*/
+				var min = 0;
+				var max = 1000000;
 
 				// how many digits should my random number have
-				var length = get_length();
+				var length = get_num();
 				while ((length > max.toString().length) || (length < min.toString().length) || (length === 0)){
-					length = get_length();
+					length = get_num();
 				}
 
 				// get random numbers
 				var random = [];
 				for (var i = 0; i < length; i++) {
 					random[i] = get_num();
+					// shouldn't start with a 0
+					while (random[0] === 0) random[0] = get_num();
 				}
-				while (random[0] === 0) random[0] = get_num();
 				var temp = parseInt(random.join(''));
 
-				while ((temp > max) || (temp < min)){
+				// checks to see if it's within its boundaries
+				while ((temp > max) || (temp < min) || (temp === 0)){
 					for (var i = 0; i < length; i++) random[i] = get_num();
+					// shouldn't start with a 0
+					while(random[0] === 0) random[0] = get_num();
 					temp = parseInt(random.join(''));
 				}
-
-				while((random[0] === 0) || temp === 0) random[0] = get_num();
-				temp = parseInt(random.join(''));
 
 				var number_html = document.getElementById("number");
 				number_html.innerHTML = temp;
@@ -110,12 +111,6 @@
 
 			function get_seed(){
 				return Date.now();
-			}
-
-			function get_length(){
-				var seed = get_seed();
-				var arr = seed.toString().split('');
-				return parseInt(arr[arr.length - 1]);
 			}
 		</script>
 	</head>
